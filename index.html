@@ -89,11 +89,7 @@ section{position:relative}
 
 /* ---------- Omega-3-Badge (Style Guide Kap. 04: schwarzer Kreis „MIT / 3 / OMEGA“) */
 /* Omega-3-Badge 1:1 nach Style Guide 1.0, freigegeben (.c-omg: 240 px · i 22/600/.16em · b 108/850 · gap 2) */
-.o3{--d:89px;width:var(--d);height:var(--d);flex:none;border-radius:50%;background:#141414;color:#fff;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--d) * .0083)}
-.o3 i{font:600 calc(var(--d) * .0917)/1 var(--display);font-style:normal;letter-spacing:.16em;text-transform:uppercase}
-.o3 b{font:850 calc(var(--d) * .45)/1 var(--display)}
-.o3.sm{--d:55px}
-.o3.lg{--d:110px}
+.o3{display:block;width:110px;height:110px;flex:none}
 
 /* ---------- Header */
 .top{position:sticky;top:0;z-index:50;background:var(--violet);color:var(--eis);border-bottom:1px solid rgba(250,251,255,.12)}
@@ -116,6 +112,7 @@ section{position:relative}
 .hero-stage picture.on{opacity:1}
 .hero-stage img{width:100%;height:100%;object-fit:cover}
 .hero-o3{position:absolute;top:var(--s21);right:var(--s21);z-index:3}
+.hero-stage .hero-o3 img.o3{width:110px;height:110px;object-fit:contain}
 .hero-dots{position:absolute;left:var(--gutter);right:var(--gutter);bottom:var(--s21);display:flex;gap:var(--s8);z-index:2}
 .hero-dots button{flex:1;height:34px;border:0;background:none;padding:0;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;gap:var(--s8);font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--on-violet-muted);text-align:left}
 .hero-dots button::after{content:"";display:block;height:2px;background:rgba(250,251,255,.3)}
@@ -169,7 +166,6 @@ section{position:relative}
 .picker::-webkit-scrollbar{display:none}
 .picker a{flex:0 0 61.8%;scroll-snap-align:start;text-decoration:none;color:var(--ink)}
 .picker .pimg{position:relative;display:block}
-.picker .pimg .o3{position:absolute;top:var(--s8);right:var(--s8);--d:44px}
 .picker img{aspect-ratio:4/5;object-fit:cover;width:100%;background:var(--violet)}
 .picker .ptitle{display:flex;justify-content:space-between;align-items:baseline;margin-top:var(--s13);font:700 14px/1.2 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--violet)}
 .picker .ptitle small{font:400 11px/1 var(--display);letter-spacing:.12em;color:var(--muted)}
@@ -420,7 +416,7 @@ legend{padding:0;margin-bottom:var(--s21);font:700 16px/1.2 var(--display);lette
     <div class="hero-stage" id="heroStage" aria-label="Die fünf SANNIS-Geschenkboxen">
       <!-- gefüllt per JS aus BOXES -->
       <div class="hero-dots" id="heroDots"></div>
-      <div class="hero-o3"><span class="o3 lg" role="img" aria-label="Mit Omega-3"><i>Mit</i><b>3</b><i>Omega</i></span></div>
+      <div class="hero-o3"><img class="o3" src="assets/img/omega3/omega3_label_white_outline.png" width="110" height="110" alt="Mit Omega-3"></div>
     </div>
   </div>
 </section>
@@ -453,7 +449,7 @@ legend{padding:0;margin-bottom:var(--s21);font:700 16px/1.2 var(--display);lette
     <div>
       <p class="label rv">Das Herz jeder Box:</p>
       <h2 class="h2 rv">Ein Öl.<br><span class="outline">Alles,</span><br>was guttut.</h2>
-      <div class="rv" style="margin-top:var(--s34)"><span class="o3" role="img" aria-label="Mit Omega-3"><i>Mit</i><b>3</b><i>Omega</i></span></div>
+      <div class="rv" style="margin-top:var(--s34)"><img class="o3" src="assets/img/omega3/omega3_label_white.png" width="110" height="110" alt="Mit Omega-3" loading="lazy"></div>
     </div>
     <div>
       <p class="lead rv" style="margin-top:0">In jedem SANNIS-Produkt steckt dasselbe: Bio-Leinöl aus unserer eigenen Presse. Das Öl ist reich an Omega-3 und voller Genuss – cremig, nussig, nicht bitter, weil wir schonend kalt pressen. In der Küche ist es Lebensmittel, im Bad die Basis von SANNIS Kosmetik. So wie innen, so auch außen.</p>
