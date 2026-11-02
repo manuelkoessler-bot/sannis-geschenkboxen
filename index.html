@@ -135,7 +135,7 @@ section{position:relative}
 .origin-img figcaption{position:absolute;left:var(--gutter);bottom:var(--s21);font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(68,39,105,.88);padding:var(--s8) var(--s13);border-radius:999px}
 /* Seitenflächen nur Violett / Eisweiß / Schwarz (Style Guide Kap. 16–18): Herkunft auf Eisweiß, Haarlinie als Abschluss */
 .origin{background:var(--eis);border-bottom:1px solid var(--haar)}
-.origin-copy{padding:var(--s89) 0 var(--s144)}
+.origin-copy{padding:var(--s89) var(--gutter) var(--s144)}
 .alt{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 var(--s13);margin:var(--s34) 0 0;color:var(--violet)}
 .alt b{font:700 var(--t68)/1 var(--display);letter-spacing:.01em}
 .alt span{font:400 15px/1 var(--display);letter-spacing:.15em;text-transform:uppercase;white-space:nowrap}
@@ -864,6 +864,20 @@ $("#reqForm").addEventListener("submit", async e=>{
   same.addEventListener("change",sync); sync();
   const d=new Date(); d.setDate(d.getDate()+7); t.min=d.toISOString().slice(0,10);
   t.addEventListener("click",()=>{ try{ t.showPicker(); }catch(e){} }); })();
+
+/* ===================== Kollektion: läuft mobil von selbst durch (pausiert bei Berührung) */
+(function(){ const pk=$("#picker"); if(!pk) return;
+  const mq=matchMedia("(max-width:1023px)"), rm=matchMedia("(prefers-reduced-motion:reduce)");
+  let i=0, timer=null, pauseUntil=0, visible=false;
+  const step=()=>{ if(!mq.matches||rm.matches||!visible||Date.now()<pauseUntil) return;
+    const cards=[...pk.children]; if(!cards.length) return;
+    const atEnd = pk.scrollLeft + pk.clientWidth >= pk.scrollWidth - 4;
+    i = atEnd ? 0 : Math.min(i+1, cards.length-1);
+    pk.scrollTo({left: i ? cards[i].offsetLeft - cards[0].offsetLeft : 0, behavior:"smooth"}); };
+  const pause=()=>{ pauseUntil=Date.now()+8000; const c=[...pk.children]; i=Math.max(0,c.findIndex(a=>a.offsetLeft-pk.offsetLeft>=pk.scrollLeft-4)); };
+  ["touchstart","pointerdown","wheel"].forEach(ev=>pk.addEventListener(ev,pause,{passive:true}));
+  new IntersectionObserver(es=>{ visible=es[0].isIntersecting; },{threshold:.4}).observe(pk);
+  timer=setInterval(step,2600); })();
 
 /* ===================== Herkunft-Slideshow */
 (function(){ const f=[...document.querySelectorAll("#originShow figure")]; let i=0;
